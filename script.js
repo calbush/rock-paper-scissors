@@ -51,6 +51,8 @@ function playRound(){
 }
 
 function game(){
+  let playerScore = 0;
+  let computerScore = 0;
   for (let gamesPlayed = 0; gamesPlayed < 5; gamesPlayed++){
       let result = playRound();
       console.log(result);
@@ -74,6 +76,3 @@ function game(){
 
 let playerSelection;
 let computerSelection;
-
-let playerScore = 0;
-let computerScore = 0;
