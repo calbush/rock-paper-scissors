@@ -1,78 +1,104 @@
 function computerPlay(){
     let computerMove = Math.floor(Math.random() * 3);
     if (computerMove === 0){
-        return "ROCK";
+        return "Rock";
     }
     else if (computerMove === 1){
-        return "PAPER"
+        return "Paper"
     }
-        return "SCISSORS";
+        return "Scissors";
 }
 
-function playerPlay(){
-    let playerMove;
-    return playerMove = prompt("Rock, Paper, or Scissors?").toUpperCase();
-}
 
-function playRound(){
-    playerSelection = playerPlay();
-    computerSelection = computerPlay();
-    if (playerSelection === computerSelection){
-        return "It's a draw"
+function playRound(move){
+    let computerSelection = computerPlay();
+    if (move === computerSelection){
+        return
     }
     //player selects rock
-    if (playerSelection === "ROCK"){
-        if (computerSelection === "PAPER"){
-            return "You Lose! Paper beats Rock"
+    if (move === "Rock"){
+        if (computerSelection === "Paper"){
+            computerWin++;
+            return;
         }
-        else if (computerSelection === "SCISSORS"){
-            return "You Win! Rock beats Scissors"
+        else if (computerSelection === "Scissors"){
+            playerWin++;
+            return;
         }
         }
     //player selects paper
-    else if (playerSelection === "PAPER"){
-        if (computerSelection === "ROCK"){
-            return "You Win! Paper beats Rock"
+    else if (move === "Paper"){
+        if (computerSelection === "Rock"){
+            playerWin++;
+            return;
         }
-        else if (computerSelection === "SCISSORS"){
-            return "You Lose! Scissors beats Paper"
+        else if (computerSelection === "Scissors"){
+            computerWin++;
+            return;
         }
     }
     //player selects scissors
-    else if (playerSelection === "SCISSORS"){
-        if (computerSelection === "ROCK"){
-            return "You Lose! Rock beats Scissors"
+    else if (move === "Scissors"){
+        if (computerSelection === "Rock"){
+            computerWin++;
+            return;
         }
-        else if (computerSelection === "PAPER"){
-            return "You Win! Scissors beats Paper"
+        else if (computerSelection === "Paper"){
+            playerWin++;
+            return;
         }
     }
 
 }
+let playerWin = 0;
+let computerWin = 0;
 
-function game(){
-  let playerScore = 0;
-  let computerScore = 0;
-  for (let gamesPlayed = 0; gamesPlayed < 5; gamesPlayed++){
-      let result = playRound();
-      console.log(result);
-      if (result.slice(0,8) === "You Win!"){
-          playerScore += 1
-      }
-      else if (result.slice(0,9) === "You Lose!"){
-          computerScore +=1
-      }
-  }
-  if (playerScore > computerScore){
-      return "You win!"
-  }
-  else if (playerScore < computerScore){
-      return "Computer Wins."
-  }
-  else {
-      return "It's a draw"
-  }
+const body = document.body;
+const btn = document.createElement("button");
+const btn2 = document.createElement("button");
+const btn3 = document.createElement("button");
+
+body.appendChild(btn);
+btn.textContent = "Rock";
+body.appendChild(btn2);
+btn2.textContent = "Paper"
+body.appendChild(btn3);
+btn3.textContent = "Scissors"
+
+const allBtn = document.querySelectorAll('button');
+console.log(allBtn);
+
+const resultsDiv = document.createElement("div");
+body.appendChild(resultsDiv);
+resultsDiv.textContent = `Player Wins: 0 Computer Wins: 0`
+
+for (button of allBtn) {
+    button.addEventListener('click', (e) => {
+        if (playerWin < 5 || computerWin < 5) {
+            playRound(e.target.outerText)
+        }
+    })
 }
 
-let playerSelection;
-let computerSelection;
+
+        
+        
+    
+
+
+
+for (button of allBtn) {
+    button.addEventListener('click', function() {
+        if (playerWin < 5 && computerWin < 5){
+            resultsDiv.textContent = `Player Wins:${playerWin} Computer Wins:${computerWin}`}
+        else if (playerWin === 5){
+            resultsDiv.textContent = 'Player Wins!'
+        }
+        else if (computerWin === 5) {
+            resultsDiv.textContent = 'Computer Wins!'
+        }
+        })
+    }
+
+
+
